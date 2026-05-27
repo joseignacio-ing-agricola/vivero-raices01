@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raíces de Petorca — Vivero & Plantas</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --verde-oscuro:#1a3d2b;
+  --verde:#2d6a4f;
+  --verde-medio:#40916c;
+  --verde-claro:#74c69d;
+  --verde-palido:#d8f3dc;
+  --tierra:#8b5e3c;
+  --tierra-claro:#c8956c;
+  --crema:#faf7f0;
+  --crema-oscuro:#f0ebe0;
+  --blanco:#ffffff;
+  --gris:#6b7280;
+  --gris-claro:#e5e7eb;
+  --negro:#111827;
+  --accent:#e07a2f;
+  --sombra:rgba(26,61,43,0.10);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--crema);color:var(--negro);min-height:100vh;}
+
+/* NAV */
+nav{background:var(--verde-oscuro);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:68px;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.25);}
+.logo-wrap{display:flex;align-items:center;gap:12px;}
+.logo-svg{width:44px;height:44px;}
+.logo-text{display:flex;flex-direction:column;line-height:1.1;}
+.logo-text span:first-child{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--blanco);letter-spacing:.5px;}
+.logo-text span:last-child{font-size:.68rem;color:var(--verde-claro);letter-spacing:2px;text-transform:uppercase;}
+nav ul{display:flex;gap:2rem;list-style:none;}
+nav ul li a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.88rem;font-weight:400;transition:color .2s;cursor:pointer;letter-spacing:.3px;}
+nav ul li a:hover{color:var(--verde-claro);}
+.nav-right{display:flex;align-items:center;gap:1rem;}
+.horario-nav{font-size:.75rem;color:rgba(255,255,255,.5);text-align:right;line-height:1.4;}
+.nav-cart{background:var(--verde-medio);color:var(--blanco);border:none;padding:.5rem 1.2rem;border-radius:30px;cursor:pointer;font-size:.88rem;font-weight:500;display:flex;align-items:center;gap:7px;transition:background .2s;}
+.nav-cart:hover{background:var(--accent);}
+.cart-badge{background:var(--accent);color:var(--blanco);border-radius:50%;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;}
+
+/* HERO */
+.hero{position:relative;min-height:520px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--verde-oscuro);}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0d2419 0%,#1a3d2b 40%,#2d6a4f 100%);opacity:.92;}
+.hero-pattern{position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);background-size:20px 20px;}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:680px;padding:3rem 2rem;}
+.hero-badge{display:inline-block;background:rgba(116,198,157,.15);border:1px solid rgba(116,198,157,.3);color:var(--verde-claro);font-size:.75rem;letter-spacing:2px;text-transform:uppercase;padding:.35rem 1rem;border-radius:30px;margin-bottom:1.5rem;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:3.6rem;color:var(--blanco);line-height:1.1;margin-bottom:1.2rem;}
+.hero h1 em{font-style:italic;color:var(--verde-claro);}
+.hero p{color:rgba(255,255,255,.65);font-size:1.05rem;line-height:1.7;margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto;}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-primary{background:var(--verde-claro);color:var(--verde-oscuro);border:none;padding:.8rem 2rem;border-radius:30px;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s;letter-spacing:.3px;}
+.btn-primary:hover{background:var(--accent);color:var(--blanco);transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--blanco);border:1.5px solid rgba(255,255,255,.3);padding:.8rem 2rem;border-radius:30px;font-size:.95rem;font-weight:400;cursor:pointer;transition:all .2s;}
+.btn-outline:hover{border-color:var(--verde-claro);color:var(--verde-claro);}
+
+/* INFO BAR */
+.info-bar{background:var(--blanco);display:flex;justify-content:center;gap:0;border-bottom:1px solid var(--gris-claro);}
+.info-item{display:flex;align-items:center;gap:.6rem;padding:1rem 2rem;font-size:.83rem;color:var(--gris);border-right:1px solid var(--gris-claro);}
+.info-item:last-child{border-right:none;}
+.info-item strong{color:var(--verde);font-weight:500;}
+
+/* STATS */
+.stats-bar{background:var(--verde-palido);display:flex;justify-content:center;gap:3rem;padding:1.5rem 2rem;flex-wrap:wrap;}
+.stat{text-align:center;}
+.stat strong{display:block;font-size:1.7rem;color:var(--verde);font-weight:600;font-family:'Cormorant Garamond',serif;}
+.stat span{font-size:.78rem;color:var(--verde-medio);letter-spacing:.5px;text-transform:uppercase;}
+
+/* SECCIÓN */
+.section{padding:4.5rem 2rem;max-width:1200px;margin:0 auto;}
+.section-label{font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--verde-medio);margin-bottom:.5rem;font-weight:500;}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:2.4rem;color:var(--verde-oscuro);margin-bottom:.5rem;line-height:1.2;}
+.section-sub{color:var(--gris);margin-bottom:2.5rem;font-size:.92rem;line-height:1.6;}
+
+/* FILTROS */
+.search-filter-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.search-bar{flex:1;min-width:200px;max-width:360px;padding:.6rem 1.2rem;border:1.5px solid var(--gris-claro);border-radius:30px;font-size:.9rem;font-family:inherit;outline:none;background:var(--blanco);transition:border .2s;}
+.search-bar:focus{border-color:var(--verde-claro);}
+.filters{display:flex;gap:.5rem;flex-wrap:wrap;}
+.filter-btn{padding:.38rem 1rem;border-radius:20px;border:1.5px solid var(--gris-claro);background:var(--blanco);color:var(--gris);font-size:.82rem;font-weight:400;cursor:pointer;transition:all .2s;}
+.filter-btn.active,.filter-btn:hover{background:var(--verde);color:var(--blanco);border-color:var(--verde);}
+
+/* GRID PLANTAS */
+.plants-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.5rem;}
+.plant-card{background:var(--blanco);border-radius:16px;overflow:hidden;box-shadow:0 2px 16px var(--sombra);transition:transform .25s,box-shadow .25s;position:relative;border:1px solid rgba(0,0,0,.04);}
+.plant-card:hover{transform:translateY(-5px);box-shadow:0 12px 32px var(--sombra);}
+.plant-img{width:100%;height:200px;object-fit:cover;display:block;}
+.plant-img-placeholder{width:100%;height:200px;display:flex;align-items:center;justify-content:center;font-size:4.5rem;}
+.badge-new{position:absolute;top:12px;right:12px;background:var(--verde);color:var(--blanco);font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:20px;letter-spacing:.5px;}
+.badge-sale{position:absolute;top:12px;left:12px;background:var(--accent);color:var(--blanco);font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:20px;}
+.plant-info{padding:1rem 1.2rem 1.3rem;}
+.plant-name{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--negro);margin-bottom:.15rem;font-weight:600;}
+.plant-name-sci{font-size:.75rem;color:var(--gris);font-style:italic;margin-bottom:.7rem;}
+.plant-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.9rem;}
+.tag{background:var(--verde-palido);color:var(--verde);font-size:.7rem;padding:2px 8px;border-radius:10px;font-weight:500;}
+.plant-desc{font-size:.8rem;color:var(--gris);line-height:1.55;margin-bottom:.9rem;}
+.plant-price-row{display:flex;align-items:center;justify-content:space-between;}
+.price-wrap{display:flex;align-items:baseline;gap:6px;}
+.plant-price{font-size:1.2rem;font-weight:600;color:var(--verde);}
+.plant-price-old{font-size:.82rem;color:var(--gris);text-decoration:line-through;}
+.add-btn{background:var(--verde);color:var(--blanco);border:none;width:38px;height:38px;border-radius:50%;font-size:1.4rem;font-weight:300;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.add-btn:hover{background:var(--verde-claro);transform:scale(1.1);}
+.add-btn.added{background:var(--accent);}
+
+/* CUIDADOS */
+.care-section{background:var(--crema-oscuro);padding:4.5rem 2rem;}
+.care-inner{max-width:1200px;margin:0 auto;}
+.care-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1.2rem;}
+.care-card{background:var(--blanco);border-radius:14px;padding:1.6rem 1.1rem;text-align:center;border-top:3px solid var(--verde-claro);box-shadow:0 2px 10px var(--sombra);}
+.care-icon{font-size:2rem;margin-bottom:.8rem;}
+.care-title{font-weight:600;color:var(--verde-oscuro);margin-bottom:.4rem;font-size:.92rem;}
+.care-text{font-size:.8rem;color:var(--gris);line-height:1.55;}
+
+/* NOSOTROS */
+.about-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;}
+.about-card{background:var(--blanco);border-radius:14px;padding:1.6rem;box-shadow:0 2px 12px var(--sombra);}
+.about-icon{font-size:2rem;margin-bottom:.8rem;}
+.about-title{font-weight:600;color:var(--verde);margin-bottom:.4rem;font-size:.95rem;}
+.about-text{color:var(--gris);font-size:.85rem;line-height:1.6;}
+
+/* CONTACTO */
+.contact-section{background:var(--verde-oscuro);padding:4rem 2rem;}
+.contact-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+.contact-info h2{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--blanco);margin-bottom:1.2rem;}
+.contact-item{display:flex;align-items:flex-start;gap:.8rem;margin-bottom:1rem;}
+.contact-icon{font-size:1.2rem;margin-top:.1rem;}
+.contact-label{font-size:.75rem;color:var(--verde-claro);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.15rem;}
+.contact-val{color:rgba(255,255,255,.85);font-size:.9rem;line-height:1.5;}
+.contact-val a{color:var(--verde-claro);text-decoration:none;}
+.map-placeholder{background:var(--verde-medio);border-radius:16px;height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:rgba(255,255,255,.7);font-size:.85rem;}
+.map-placeholder span:first-child{font-size:2.5rem;}
+
+/* CARRITO */
+.cart-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;}
+.cart-overlay.open{display:flex;justify-content:flex-end;}
+.cart-panel{background:var(--blanco);width:400px;max-width:96vw;height:100vh;overflow-y:auto;padding:2rem;display:flex;flex-direction:column;gap:1.2rem;animation:slideIn .25s ease;}
+@keyframes slideIn{from{transform:translateX(100%);}to{transform:translateX(0);}}
+.cart-header{display:flex;align-items:center;justify-content:space-between;}
+.cart-header h2{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--verde);}
+.close-cart{background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--gris);}
+.cart-empty{text-align:center;color:var(--gris);padding:3rem 0;}
+.cart-empty div{font-size:3rem;margin-bottom:.8rem;}
+.cart-item{display:flex;gap:.8rem;align-items:center;padding:.8rem;border-radius:10px;background:var(--crema);border:1px solid var(--verde-palido);}
+.cart-img{width:52px;height:52px;border-radius:8px;object-fit:cover;flex-shrink:0;}
+.cart-img-emoji{width:52px;height:52px;border-radius:8px;background:var(--verde-palido);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;}
+.cart-item-info{flex:1;}
+.cart-item-name{font-weight:500;font-size:.88rem;color:var(--negro);}
+.cart-item-price{font-size:.83rem;color:var(--verde);font-weight:600;}
+.cart-qty{display:flex;align-items:center;gap:6px;margin-top:4px;}
+.qty-btn{background:var(--verde-palido);border:none;width:22px;height:22px;border-radius:50%;cursor:pointer;font-weight:700;font-size:.85rem;color:var(--verde);display:flex;align-items:center;justify-content:center;}
+.qty-val{font-size:.85rem;font-weight:500;min-width:18px;text-align:center;}
+.remove-item{background:none;border:none;color:#ef4444;cursor:pointer;font-size:1rem;padding:4px;}
+.cart-total{border-top:2px solid var(--verde-palido);padding-top:1rem;margin-top:auto;}
+.cart-total-row{display:flex;justify-content:space-between;font-size:.88rem;color:var(--gris);margin-bottom:.4rem;}
+.cart-total-main{display:flex;justify-content:space-between;font-size:1.15rem;font-weight:600;color:var(--verde-oscuro);margin-top:.6rem;}
+.checkout-btn{background:var(--verde);color:var(--blanco);border:none;width:100%;padding:.9rem;border-radius:30px;font-size:.95rem;font-weight:600;cursor:pointer;transition:background .2s;margin-top:1rem;}
+.checkout-btn:hover{background:var(--verde-claro);}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--blanco);border-radius:20px;padding:2.5rem;max-width:500px;width:94%;animation:fadeUp .25s ease;max-height:90vh;overflow-y:auto;}
+@keyframes fadeUp{from{transform:translateY(30px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.modal h2{font-family:'Cormorant Garamond',serif;color:var(--verde);margin-bottom:1.5rem;font-size:1.5rem;}
+.form-group{margin-bottom:1rem;}
+.form-group label{display:block;font-size:.8rem;color:var(--gris);margin-bottom:.3rem;font-weight:500;text-transform:uppercase;letter-spacing:.5px;}
+.form-group input,.form-group select{width:100%;padding:.65rem .9rem;border:1.5px solid var(--gris-claro);border-radius:8px;font-size:.9rem;font-family:inherit;outline:none;transition:border .2s;background:var(--blanco);}
+.form-group input:focus,.form-group select:focus{border-color:var(--verde-claro);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.modal-btns{display:flex;gap:.8rem;margin-top:1.5rem;}
+.btn-cancel{flex:1;background:var(--crema-oscuro);color:var(--gris);border:none;padding:.7rem;border-radius:10px;cursor:pointer;font-weight:500;font-size:.9rem;}
+.btn-pay{flex:2;background:var(--verde);color:var(--blanco);border:none;padding:.7rem;border-radius:10px;cursor:pointer;font-weight:600;font-size:.95rem;transition:background .2s;}
+.btn-pay:hover{background:var(--verde-claro);}
+.confirm-box{text-align:center;padding:1rem 0;}
+.confirm-box .big-check{font-size:4rem;margin-bottom:1rem;}
+.confirm-box h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--verde);margin-bottom:.5rem;}
+.confirm-box p{color:var(--gris);margin-bottom:1rem;line-height:1.6;font-size:.92rem;}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--verde-oscuro);color:var(--blanco);padding:.8rem 1.5rem;border-radius:30px;font-size:.88rem;font-weight:500;box-shadow:0 4px 20px rgba(0,0,0,.2);transform:translateY(80px);opacity:0;transition:all .35s;z-index:500;border-left:3px solid var(--verde-claro);}
+.toast.show{transform:translateY(0);opacity:1;}
+
+/* FOOTER */
+footer{background:#0d2419;color:rgba(255,255,255,.5);padding:2.5rem 2rem;text-align:center;}
+footer .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--blanco);margin-bottom:.5rem;}
+footer p{font-size:.8rem;line-height:1.8;}
+footer a{color:var(--verde-claro);text-decoration:none;}
+.footer-links{display:flex;justify-content:center;gap:1.5rem;margin:1rem 0;flex-wrap:wrap;}
+.footer-links a{font-size:.82rem;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--verde-claro);}
+.social-row{display:flex;justify-content:center;gap:1rem;margin:.8rem 0;}
+.social-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.7);padding:.4rem 1rem;border-radius:20px;text-decoration:none;font-size:.78rem;transition:all .2s;}
+.social-btn:hover{background:var(--verde-medio);color:var(--blanco);}
+
+@media(max-width:680px){
+  .hero h1{font-size:2.4rem;}
+  nav ul{display:none;}
+  .info-bar{display:none;}
+  .contact-inner{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .horario-nav{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo-wrap">
+    <svg class="logo-svg" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="22" cy="22" r="22" fill="rgba(116,198,157,0.12)"/>
+      <!-- Tallo principal -->
+      <path d="M22 38 L22 18" stroke="#74c69d" stroke-width="2" stroke-linecap="round"/>
+      <!-- Hoja izquierda grande -->
+      <path d="M22 26 C16 22 10 18 12 10 C16 12 22 18 22 26Z" fill="#40916c"/>
+      <!-- Hoja derecha grande -->
+      <path d="M22 22 C28 18 35 16 34 8 C30 10 22 16 22 22Z" fill="#52b788"/>
+      <!-- Hoja izquierda pequeña -->
+      <path d="M22 20 C18 17 14 13 16 8 C19 10 22 16 22 20Z" fill="#74c69d" opacity=".7"/>
+      <!-- Raíces -->
+      <path d="M22 38 C18 38 15 40 13 42" stroke="#8b5e3c" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+      <path d="M22 38 C26 38 29 40 31 42" stroke="#8b5e3c" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+      <path d="M22 38 L22 42" stroke="#8b5e3c" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+      <!-- Tierra -->
+      <ellipse cx="22" cy="38.5" rx="6" ry="1.5" fill="#8b5e3c" opacity=".4"/>
+    </svg>
+    <div class="logo-text">
+      <span>Raíces de Petorca</span>
+      <span>Vivero & Plantas</span>
+    </div>
+  </div>
+  <ul>
+    <li><a onclick="scrollTo('tienda')">Tienda</a></li>
+    <li><a onclick="scrollTo('cuidados')">Cuidados</a></li>
+    <li><a onclick="scrollTo('nosotros')">Nosotros</a></li>
+    <li><a onclick="scrollTo('contacto')">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="horario-nav">Lun–Dom<br>9:45 – 18:30</div>
+    <button class="nav-cart" onclick="toggleCart()">🛒 Carrito <span class="cart-badge" id="cartBadge">0</span></button>
+  </div>
+</nav>
+
+<!-- INFO BAR -->
+<div class="info-bar">
+  <div class="info-item">📍 <span><strong>Petorca</strong>, Región de Valparaíso</span></div>
+  <div class="info-item">🕐 <span>Lun–Dom: <strong>9:45 – 18:30 hrs</strong></span></div>
+  <div class="info-item">📞 <span><strong>+56 9 7150 5118</strong></span></div>
+  <div class="info-item">🚚 <span>Envío gratis sobre <strong>$40.000</strong></span></div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🌿 Vivero en Petorca, V Región</div>
+    <h1>Plantas con <em>raíces</em> de verdad</h1>
+    <p>Cultivadas en el valle de Petorca, con el cuidado y la pasión de quienes aman la tierra. Encuentra tu planta ideal y lleva naturaleza viva a tu hogar.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="scrollTo('tienda')">Ver catálogo 🌱</button>
+      <button class="btn-outline" onclick="scrollTo('contacto')">¿Dónde estamos?</button>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><strong>150+</strong><span>Variedades</span></div>
+  <div class="stat"><strong>4.9 ★</strong><span>Valoración</span></div>
+  <div class="stat"><strong>48 hrs</strong><span>Envío express</span></div>
+  <div class="stat"><strong>3.000+</strong><span>Clientes felices</span></div>
+</div>
+
+<!-- TIENDA -->
+<section class="section" id="tienda">
+  <div class="section-label">Catálogo</div>
+  <h2 class="section-title">Nuestras Plantas</h2>
+  <p class="section-sub">Selección cuidada de plantas para interior, exterior, aromáticas y más — todas cultivadas en Petorca.</p>
+  <div class="search-filter-row">
+    <input class="search-bar" type="text" placeholder="🔍 Buscar planta..." oninput="filterSearch(this.value)" />
+    <div class="filters" id="filters">
+      <button class="filter-btn active" onclick="setFilter('all',this)">Todas</button>
+      <button class="filter-btn" onclick="setFilter('interior',this)">Interior</button>
+      <button class="filter-btn" onclick="setFilter('exterior',this)">Exterior</button>
+      <button class="filter-btn" onclick="setFilter('suculenta',this)">Suculentas</button>
+      <button class="filter-btn" onclick="setFilter('aromatica',this)">Aromáticas</button>
+      <button class="filter-btn" onclick="setFilter('flor',this)">Flores</button>
+    </div>
+  </div>
+  <div class="plants-grid" id="plantsGrid"></div>
+</section>
+
+<!-- CUIDADOS -->
+<section class="care-section" id="cuidados">
+  <div class="care-inner">
+    <div class="section-label">Guía</div>
+    <h2 class="section-title" style="color:var(--verde-oscuro)">Cómo cuidar tus plantas</h2>
+    <p class="section-sub">Consejos esenciales de nuestro equipo en Petorca para que tus plantas prosperen.</p>
+    <div class="care-grid">
+      <div class="care-card"><div class="care-icon">☀️</div><div class="care-title">Luz</div><div class="care-text">La mayoría prefieren luz indirecta brillante. Evita sol directo en horas pico, especialmente en verano.</div></div>
+      <div class="care-card"><div class="care-icon">💧</div><div class="care-title">Riego</div><div class="care-text">Riega cuando la capa superior del sustrato esté seca. El exceso de agua es el error más común.</div></div>
+      <div class="care-card"><div class="care-icon">🌡️</div><div class="care-title">Temperatura</div><div class="care-text">Entre 15–25 °C para la mayoría. En Petorca el clima es ideal: evita heladas nocturnas en invierno.</div></div>
+      <div class="care-card"><div class="care-icon">🪴</div><div class="care-title">Sustrato</div><div class="care-text">Tierra específica para cada tipo. Suculentas: arenosa. Tropicales: sustrato húmedo con turba.</div></div>
+      <div class="care-card"><div class="care-icon">✂️</div><div class="care-title">Poda</div><div class="care-text">Retira hojas secas o amarillas regularmente. Estimula crecimiento y mantiene forma saludable.</div></div>
+      <div class="care-card"><div class="care-icon">🧪</div><div class="care-title">Fertilización</div><div class="care-text">Abona cada 2–4 semanas en primavera y verano. En otoño–invierno las plantas descansan.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<section class="section" id="nosotros">
+  <div class="section-label">Quiénes somos</div>
+  <h2 class="section-title">Vivero familiar en Petorca</h2>
+  <p class="section-sub">Cultivamos con pasión en el corazón del valle de Petorca, Región de Valparaíso.</p>
+  <div class="about-grid">
+    <div class="about-card"><div class="about-icon">🌱</div><div class="about-title">Cultivo propio</div><div class="about-text">Producimos nuestras plantas en Petorca con técnicas naturales, aprovechando el microclima único del valle.</div></div>
+    <div class="about-card"><div class="about-icon">📦</div><div class="about-title">Envío seguro</div><div class="about-text">Embalaje especial para que cada planta llegue sana y lista para florecer. Despachamos a toda la V Región.</div></div>
+    <div class="about-card"><div class="about-icon">💬</div><div class="about-title">Asesoría incluida</div><div class="about-text">Al comprar recibes guía de cuidados personalizada. Estamos disponibles por WhatsApp para cualquier consulta.</div></div>
+    <div class="about-card"><div class="about-icon">🌍</div><div class="about-title">Compromiso verde</div><div class="about-text">Trabajamos sin agroquímicos dañinos y promovemos plantas nativas del Valle de Petorca.</div></div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contact-section" id="contacto">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <h2>Visítanos o escríbenos</h2>
+      <div class="contact-item">
+        <span class="contact-icon">📍</span>
+        <div><span class="contact-label">Dirección</span><span class="contact-val">Petorca, Región de Valparaíso, Chile</span></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">🕐</span>
+        <div><span class="contact-label">Horario</span><span class="contact-val">Lunes a Domingo<br>9:45 – 18:30 hrs</span></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">📱</span>
+        <div><span class="contact-label">Teléfono / WhatsApp</span><span class="contact-val"><a href="tel:+56971505118">+56 9 7150 5118</a></span></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">📧</span>
+        <div><span class="contact-label">Correo</span><span class="contact-val"><a href="mailto:contacto@raicesdepetorca.cl">contacto@raicesdepetorca.cl</a></span></div>
+      </div>
+      <div class="social-row" style="justify-content:flex-start;margin-top:1.2rem;">
+        <a class="social-btn" href="https://wa.me/56971505118" target="_blank">💬 WhatsApp</a>
+        <a class="social-btn" href="#">📘 Facebook</a>
+        <a class="social-btn" href="#">📸 Instagram</a>
+      </div>
+    </div>
+    <div class="map-placeholder">
+      <span>🗺️</span>
+      <strong style="color:rgba(255,255,255,.9);font-size:.95rem;">Petorca, V Región</strong>
+      <span>Región de Valparaíso, Chile</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🌿 Raíces de Petorca</div>
+  <div class="footer-links">
+    <a onclick="scrollTo('tienda')">Tienda</a>
+    <a onclick="scrollTo('cuidados')">Cuidados</a>
+    <a onclick="scrollTo('nosotros')">Nosotros</a>
+    <a onclick="scrollTo('contacto')">Contacto</a>
+  </div>
+  <p>📍 Petorca, Región de Valparaíso · 📞 <a href="tel:+56971505118">+56 9 7150 5118</a></p>
+  <p style="margin-top:.5rem;font-size:.73rem;opacity:.4;">© 2025 Raíces de Petorca. Todos los derechos reservados.</p>
+</footer>
+
+<!-- CARRITO -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCartOutside(event)">
+  <div class="cart-panel">
+    <div class="cart-header">
+      <h2>Mi Carrito</h2>
+      <button class="close-cart" onclick="toggleCart()">✕</button>
+    </div>
+    <div id="cartItems"></div>
+    <div id="cartTotalSection"></div>
+  </div>
+</div>
+
+<!-- MODAL CHECKOUT -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal" id="modalContent">
+    <h2>Finalizar Pedido 🌿</h2>
+    <div class="form-row">
+      <div class="form-group"><label>Nombre</label><input type="text" id="fNombre" placeholder="Ana" /></div>
+      <div class="form-group"><label>Apellido</label><input type="text" id="fApellido" placeholder="Pérez" /></div>
+    </div>
+    <div class="form-group"><label>Correo electrónico</label><input type="email" id="fEmail" placeholder="ana@correo.com" /></div>
+    <div class="form-group"><label>Teléfono / WhatsApp</label><input type="tel" id="fTel" placeholder="+56 9 ..." /></div>
+    <div class="form-group"><label>Dirección de envío</label><input type="text" id="fDir" placeholder="Calle, número, ciudad" /></div>
+    <div class="form-row">
+      <div class="form-group"><label>Método de pago</label>
+        <select id="fPago">
+          <option>WebPay (Tarjeta)</option>
+          <option>Transferencia bancaria</option>
+          <option>Mercado Pago</option>
+          <option>Efectivo (retiro)</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Tipo de envío</label>
+        <select id="fEnvio">
+          <option>Estándar 3–5 días (Gratis +$40k)</option>
+          <option>Express 24–48 hrs ($4.990)</option>
+          <option>Retiro en Petorca (Gratis)</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group"><label>Nota (opcional)</label><input type="text" id="fNota" placeholder="Instrucciones especiales..." /></div>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal()">Volver</button>
+      <button class="btn-pay" onclick="confirmOrder()">Confirmar pedido →</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">🌿 Añadido al carrito</div>
+
+<script>
+const PLANTS = [
+  {
+    id:1, name:'Monstera Deliciosa', sci:'Monstera deliciosa', cat:'interior',
+    img:'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=400&q=80',
+    price:12990, tags:['Interior','Rápido crecimiento','Luz indirecta'],
+    desc:'La reina de las plantas de interior. Sus hojas perforadas son icónicas y fáciles de cuidar.', new:true
+  },
+  {
+    id:2, name:'Aloe Vera', sci:'Aloe barbadensis', cat:'suculenta',
+    img:'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=400&q=80',
+    price:6490, oldPrice:7990, tags:['Interior','Medicinal','Poca agua'],
+    desc:'Planta medicinal esencial en todo hogar. Requiere mínimo cuidado y es resistente al olvido.', sale:true
+  },
+  {
+    id:3, name:'Lavanda Francesa', sci:'Lavandula dentata', cat:'aromatica',
+    img:'https://images.unsplash.com/photo-1534337621606-e3df5ee0e97f?w=400&q=80',
+    price:5990, tags:['Exterior','Aromática','Sol pleno'],
+    desc:'Perfume natural para terrazas y jardines. Floración prolongada y atrae polinizadores.'
+  },
+  {
+    id:4, name:'Orquídea Phalaenopsis', sci:'Phalaenopsis spp.', cat:'flor',
+    img:'https://images.unsplash.com/photo-1610977842890-e97c5e60e5d3?w=400&q=80',
+    price:15990, tags:['Interior','Flores','Elegante'],
+    desc:'La orquídea más popular del mundo. Flores duraderas de hasta 3 meses en condiciones ideales.', new:true
+  },
+  {
+    id:5, name:'Potus Dorado', sci:'Epipremnum aureum', cat:'interior',
+    img:'https://images.unsplash.com/photo-1598880940372-5b5c3c5b85d3?w=400&q=80',
+    price:4990, tags:['Interior','Muy fácil','Colgante'],
+    desc:'Perfecta para principiantes. Purifica el aire y crece tanto colgante como trepadora.'
+  },
+  {
+    id:6, name:'Cactus Candelabro', sci:'Euphorbia trigona', cat:'suculenta',
+    img:'https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=400&q=80',
+    price:8490, oldPrice:10990, tags:['Interior','Poca agua','Decorativo'],
+    desc:'Imponente y de bajo mantenimiento. Ideal para espacios luminosos con estilo moderno.', sale:true
+  },
+  {
+    id:7, name:'Romero de Jardín', sci:'Salvia rosmarinus', cat:'aromatica',
+    img:'https://images.unsplash.com/photo-1515586000433-45406d8e6662?w=400&q=80',
+    price:3990, tags:['Exterior','Culinaria','Aromática'],
+    desc:'Hierba aromática ideal para cocinar y para jardines. Muy resistente al clima de la V Región.'
+  },
+  {
+    id:8, name:'Helecho Espada', sci:'Nephrolepis exaltata', cat:'interior',
+    img:'https://images.unsplash.com/photo-1597305877032-0668b3c6413a?w=400&q=80',
+    price:8990, tags:['Interior','Humedad','Sombra'],
+    desc:'El clásico helecho de interior. Purifica el aire y aporta frescura a ambientes húmedos.'
+  },
+  {
+    id:9, name:'Hortensias Bicolor', sci:'Hydrangea macrophylla', cat:'flor',
+    img:'https://images.unsplash.com/photo-1464454709131-ffd692591ee5?w=400&q=80',
+    price:13990, tags:['Exterior','Flores','Temporada'], new:true,
+    desc:'Llamativas flores que cambian de color según el pH del suelo. Ideales para jardines con sombra parcial.'
+  },
+  {
+    id:10, name:'Suculenta Mix', sci:'Echeveria / Sedum spp.', cat:'suculenta',
+    img:'https://images.unsplash.com/photo-1530968464165-7a1861cbaf9f?w=400&q=80',
+    price:3490, tags:['Interior','Poca agua','Mini'],
+    desc:'Colección mixta de suculentas en maceta. El regalo perfecto y el complemento ideal para escritorios.'
+  },
+  {
+    id:11, name:'Menta Spearmint', sci:'Mentha spicata', cat:'aromatica',
+    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&q=80',
+    price:2990, oldPrice:3990, tags:['Interior','Culinaria','Agua'], sale:true,
+    desc:'Aromática esencial para la cocina. Muy fácil de cultivar en maceta con riego constante.'
+  },
+  {
+    id:12, name:'Bambú de la Suerte', sci:'Dracaena sanderiana', cat:'interior',
+    img:'https://images.unsplash.com/photo-1611735341450-74d61e660ad2?w=400&q=80',
+    price:9990, tags:['Interior','Feng Shui','Agua'],
+    desc:'Símbolo de buena suerte y prosperidad. Puede crecer en agua o sustrato, ideal para regalos.'
+  },
+];
+
+let cart = {};
+let activeFilter = 'all';
+let searchTerm = '';
+
+function renderPlants() {
+  const grid = document.getElementById('plantsGrid');
+  let list = PLANTS;
+  if (activeFilter !== 'all') list = list.filter(p => p.cat === activeFilter);
+  if (searchTerm) list = list.filter(p => p.name.toLowerCase().includes(searchTerm) || p.sci.toLowerCase().includes(searchTerm));
+  if (!list.length) { grid.innerHTML = '<p style="color:var(--gris);grid-column:1/-1;text-align:center;padding:3rem;">No se encontraron plantas para tu búsqueda.</p>'; return; }
+  grid.innerHTML = list.map(p => `
+    <div class="plant-card">
+      ${p.new ? '<span class="badge-new">NUEVO</span>' : ''}
+      ${p.sale ? '<span class="badge-sale">OFERTA</span>' : ''}
+      <img class="plant-img" src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+      <div class="plant-img-placeholder" style="display:none">🌿</div>
+      <div class="plant-info">
+        <div class="plant-name">${p.name}</div>
+        <div class="plant-name-sci">${p.sci}</div>
+        <div class="plant-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        <div class="plant-desc">${p.desc}</div>
+        <div class="plant-price-row">
+          <div class="price-wrap">
+            <span class="plant-price">$${p.price.toLocaleString('es-CL')}</span>
+            ${p.oldPrice ? `<span class="plant-price-old">$${p.oldPrice.toLocaleString('es-CL')}</span>` : ''}
+          </div>
+          <button class="add-btn" id="btn-${p.id}" onclick="addToCart(${p.id})">+</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function setFilter(cat, btn) {
+  activeFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPlants();
+}
+
+function filterSearch(val) {
+  searchTerm = val.toLowerCase();
+  renderPlants();
+}
+
+function addToCart(id) {
+  cart[id] = (cart[id] || 0) + 1;
+  updateCartBadge(); renderCartItems(); showToast();
+  const btn = document.getElementById('btn-' + id);
+  if (btn) { btn.classList.add('added'); btn.textContent = '✓'; setTimeout(() => { btn.classList.remove('added'); btn.textContent = '+'; }, 900); }
+}
+
+function removeFromCart(id) { delete cart[id]; updateCartBadge(); renderCartItems(); }
+
+function changeQty(id, delta) {
+  cart[id] = (cart[id] || 0) + delta;
+  if (cart[id] <= 0) delete cart[id];
+  updateCartBadge(); renderCartItems();
+}
+
+function updateCartBadge() {
+  document.getElementById('cartBadge').textContent = Object.values(cart).reduce((a,b)=>a+b,0);
+}
+
+function renderCartItems() {
+  const items = Object.entries(cart);
+  const el = document.getElementById('cartItems');
+  const tel = document.getElementById('cartTotalSection');
+  if (!items.length) {
+    el.innerHTML = '<div class="cart-empty"><div>🌱</div><p>Tu carrito está vacío</p></div>';
+    tel.innerHTML = ''; return;
+  }
+  el.innerHTML = items.map(([id,qty]) => {
+    const p = PLANTS.find(x=>x.id==id);
+    return `<div class="cart-item">
+      <img class="cart-img" src="${p.img}" alt="${p.name}" onerror="this.style.display='none'"/>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${p.name}</div>
+        <div class="cart-item-price">$${(p.price*qty).toLocaleString('es-CL')}</div>
+        <div class="cart-qty">
+          <button class="qty-btn" onclick="changeQty(${id},-1)">−</button>
+          <span class="qty-val">${qty}</span>
+          <button class="qty-btn" onclick="changeQty(${id},1)">+</button>
+        </div>
+      </div>
+      <button class="remove-item" onclick="removeFromCart(${id})" title="Eliminar">🗑</button>
+    </div>`;
+  }).join('');
+  const subtotal = items.reduce((s,[id,q])=>{const p=PLANTS.find(x=>x.id==id);return s+p.price*q;},0);
+  const envio = subtotal >= 40000 ? 0 : 2990;
+  tel.innerHTML = `<div class="cart-total">
+    <div class="cart-total-row"><span>Subtotal</span><span>$${subtotal.toLocaleString('es-CL')}</span></div>
+    <div class="cart-total-row"><span>Envío</span><span>${envio===0?'<span style="color:var(--verde)">Gratis 🎉</span>':'$'+envio.toLocaleString('es-CL')}</span></div>
+    <div class="cart-total-main"><span>Total</span><span>$${(subtotal+envio).toLocaleString('es-CL')}</span></div>
+    <button class="checkout-btn" onclick="openCheckout()">Ir a pagar →</button>
+  </div>`;
+}
+
+function toggleCart() { document.getElementById('cartOverlay').classList.toggle('open'); renderCartItems(); }
+function closeCartOutside(e) { if(e.target===document.getElementById('cartOverlay')) toggleCart(); }
+function openCheckout() { document.getElementById('checkoutModal').classList.add('open'); }
+function closeModal() { document.getElementById('checkoutModal').classList.remove('open'); }
+
+function confirmOrder() {
+  const n = document.getElementById('fNombre').value.trim();
+  const e = document.getElementById('fEmail').value.trim();
+  const d = document.getElementById('fDir').value.trim();
+  const tel = document.getElementById('fTel').value.trim();
+  const pago = document.getElementById('fPago').value;
+  const envioTipo = document.getElementById('fEnvio').value;
+  const nota = document.getElementById('fNota').value.trim();
+  if (!n || !d) { alert('Por favor completa al menos nombre y dirección.'); return; }
+  const items = Object.entries(cart);
+  const subtotal = items.reduce((s,[id,q])=>{const p=PLANTS.find(x=>x.id==id);return s+p.price*q;},0);
+  const costoEnvio = subtotal >= 40000 ? 0 : 2990;
+  const total = subtotal + costoEnvio;
+  const orden = 'RP-' + Date.now().toString().slice(-6);
+
+  // Armar mensaje WhatsApp
+  const lineas = items.map(([id,q])=>{
+    const p = PLANTS.find(x=>x.id==id);
+    return `  • ${p.name} x${q} = $${(p.price*q).toLocaleString('es-CL')}`;
+  }).join('\n');
+
+  const msg = [
+    '🌿 *NUEVO PEDIDO — Raíces de Petorca*',
+    `📋 Orden: *${orden}*`,
+    '',
+    '👤 *Cliente*',
+    `  Nombre: ${n}`,
+    tel ? `  Teléfono: ${tel}` : '',
+    e ? `  Correo: ${e}` : '',
+    `  Dirección: ${d}`,
+    '',
+    '🛒 *Productos*',
+    lineas,
+    '',
+    '💰 *Resumen*',
+    `  Subtotal: $${subtotal.toLocaleString('es-CL')}`,
+    `  Envío: ${costoEnvio === 0 ? 'Gratis' : '$' + costoEnvio.toLocaleString('es-CL')}`,
+    `  *TOTAL: $${total.toLocaleString('es-CL')}*`,
+    '',
+    `💳 Pago: ${pago}`,
+    `🚚 Envío: ${envioTipo}`,
+    nota ? `📝 Nota: ${nota}` : '',
+    '',
+    '✅ Por favor confirmar disponibilidad.'
+  ].filter(l => l !== null && l !== undefined).join('\n');
+
+  const waUrl = 'https://wa.me/56971505118?text=' + encodeURIComponent(msg);
+
+  document.getElementById('modalContent').innerHTML = `<div class="confirm-box">
+    <div class="big-check">✅</div>
+    <h3>¡Pedido listo!</h3>
+    <p>Tu pedido <strong>${orden}</strong> está armado por <strong>$${total.toLocaleString('es-CL')}</strong>.<br>
+    Haz clic en el botón para enviarlo directamente a nuestro WhatsApp y confirmar.</p>
+    <a href="${waUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#25d366;color:#fff;text-decoration:none;padding:.85rem 2rem;border-radius:30px;font-weight:600;font-size:1rem;margin-top:1.2rem;">
+      💬 Enviar pedido por WhatsApp
+    </a>
+    <br><br>
+    <button class="btn-cancel" style="margin-top:.5rem;" onclick="finalConfirm()">Cerrar y seguir comprando</button>
+  </div>`;
+}
+
+function finalConfirm() {
+  cart={}; updateCartBadge(); renderCartItems();
+  document.getElementById('checkoutModal').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('open');
+  location.reload();
+}
+
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+function scrollTo(id) { document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'}); }
+
+renderPlants();
+</script>
+</body>
+</html>
